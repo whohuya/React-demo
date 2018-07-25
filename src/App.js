@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
-import LogoLynu from './image/logo.png'
+import lynuLogo from './image/logo.png'
 import NewItem from './NewItem'
 import AddCar from './AddCar'
 import './App.css'
@@ -12,7 +12,7 @@ const titleStyle = {
   fontSize: '32px',
   fontWeight: '900'
 }
-const h1Style = {
+const headerTitle = {
   borderBottom: '4px solid #2F6B40',
   height: '100%',
   padding: '32px',
@@ -20,17 +20,17 @@ const h1Style = {
   justifyContent: 'space-around',
   background: 'linear-gradient(52deg,#F0FFFF,#F0F8FF)'
 }
-const itemStyle = {
+const busTimeItem = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
   height: '150',
   background: 'linear-gradient(52deg,#F0FFFF,#F0F8FF)',
-  opacity:0.8,
+  opacity: 0.8,
   marginTop: '16px',
   borderRadius: '15px',
   width: '100%',
-  alignItems:'space-around',
+  alignItems: 'space-around',
   border: '2px solid #2F6B40'
 }
 const trafficInformation = {
@@ -43,8 +43,8 @@ class App extends Component {
     carList: [
       {
         id: '001',
-        start: '成均桥',
-        end: '高铁站',
+        startPlace: '成均桥',
+        endPlace: '高铁站',
         startTime: '12:00',
         endTime: '12:50',
         allTime: '50分钟',
@@ -52,8 +52,8 @@ class App extends Component {
       },
       {
         id: '002',
-        start: '成均桥',
-        end: '洛阳站',
+        startPlace: '成均桥',
+        endPlace: '洛阳站',
         startTime: '12:10',
         endTime: '14:00',
         allTime: '1时50分',
@@ -61,8 +61,8 @@ class App extends Component {
       },
       {
         id: '003',
-        start: '枣园',
-        end: '高铁站',
+        startPlace: '枣园',
+        endPlace: '高铁站',
         startTime: '12:00',
         endTime: '12:50',
         allTime: '50分钟',
@@ -70,8 +70,8 @@ class App extends Component {
       },
       {
         id: '004',
-        start: '枣园',
-        end: '洛阳站',
+        startPlace: '枣园',
+        endPlace: '洛阳站',
         startTime: '12:10',
         endTime: '14:00',
         allTime: '1时50分',
@@ -79,8 +79,8 @@ class App extends Component {
       },
       {
         id: '005',
-        start: '成均桥',
-        end: '高铁站',
+        startPlace: '成均桥',
+        endPlace: '高铁站',
         startTime: '17:00',
         endTime: '17:50',
         allTime: '50分钟',
@@ -88,8 +88,8 @@ class App extends Component {
       },
       {
         id: '006',
-        start: '成均桥',
-        end: '洛阳站',
+        startPlace: '成均桥',
+        endPlace: '洛阳站',
         startTime: '17:30',
         endTime: '19:20',
         allTime: '1时50分',
@@ -97,8 +97,8 @@ class App extends Component {
       },
       {
         id: '007',
-        start: '枣园',
-        end: '高铁站',
+        startPlace: '枣园',
+        endPlace: '高铁站',
         startTime: '17:10',
         endTime: '18:00',
         allTime: '50分钟',
@@ -106,8 +106,8 @@ class App extends Component {
       },
       {
         id: '008',
-        start: '枣园',
-        end: '洛阳站',
+        startPlace: '枣园',
+        endPlace: '洛阳站',
         startTime: '17:30',
         endTime: '19:30',
         allTime: '2小时',
@@ -115,8 +115,8 @@ class App extends Component {
       },
       {
         id: '009',
-        start: '成均桥',
-        end: '高铁站',
+        startPlace: '成均桥',
+        endPlace: '高铁站',
         startTime: '19:00',
         endTime: '19:50',
         allTime: '50分钟',
@@ -124,8 +124,8 @@ class App extends Component {
       },
       {
         id: '010',
-        start: '成均桥',
-        end: '洛阳站',
+        startPlace: '成均桥',
+        endPlace: '洛阳站',
         startTime: '19:20',
         endTime: '21:10',
         allTime: '1时50分',
@@ -145,16 +145,13 @@ class App extends Component {
   }
 
   onAdd = (newDetail) => {
-    console.log(newDetail)
-
     let newCarList = this.state.carList
     newCarList.push(newDetail)
-    console.log(newCarList)
     this.setState({carList: newCarList})
     // {
     //   id: '010',
-    //     start: '成均桥',
-    //   end: '洛阳站',
+    //     startPlace: '成均桥',
+    //   endPlace: '洛阳站',
     //   startTime: '19:20',
     //   endTime: '21:10',
     //   allTime:'1时50分',
@@ -193,34 +190,52 @@ class App extends Component {
           height: '100%',
           minWidth: '1030px'
         }}>
-        <div id='head' style={h1Style}>
-          <div style={{margin: '0 auto'}}><img src={LogoLynu}
+        <div id='head' style={headerTitle}>
+          <div style={{margin: '0 auto'}}><img src={lynuLogo}
             style={{width: '100%', height: '100%'}} /></div>
           <div style={{margin: '0 auto'}}><p style={titleStyle}>洛阳师范学院班车时刻表</p></div>
         </div>
-        <button onClick={() => {this.onOpen()}} style={{width:'100%',height:'45px',borderRadius: '15px',background:'#457DDD',fontSize:'32px',color:'#fff'}}>申请临时加车</button>
+        <button onClick={() => {this.onOpen()}} style={{
+          width: '100%',
+          height: '45px',
+          borderRadius: '15px',
+          background: '#457DDD',
+          fontSize: '32px',
+          color: '#fff'
+        }}>申请临时加车
+        </button>
         <div id='main'
           style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
           <div id='list' style={{display: 'flex', flexDirection: 'column', flexBasis: '40%',}}>
             {this.state.carList.length > 0 && this.state.carList.map(item =>
-              <div key={item.id} style={itemStyle}>
+              <div key={item.id} style={busTimeItem}>
                 <div id='start' style={trafficInformation}>
-                  <p style={{fontWeight:900,fontSize:'20px'}}>{item.startTime}</p>
-                  <p style={{textAlign:'center'}}><span style={{marginRight:'4px',color:'#3399FF'}}>始</span>{item.start}</p>
+                  <p style={{fontWeight: 900, fontSize: '20px'}}>{item.startTime}</p>
+                  <p style={{textAlign: 'center'}}><span
+                    style={{marginRight: '4px', color: '#3399FF'}}>始</span>{item.startPlace}</p>
                 </div>
                 <div id='mess' style={trafficInformation}>
-                  <p style={{fontWeight:900, textAlign:'center'}}>{item.carNumber}</p>
+                  <p style={{fontWeight: 900, textAlign: 'center'}}>{item.carNumber}</p>
                   <hr />
-                  <p>{item.allTime}</p>
+                  {item.creator ?  <p> <span style={{color:'#FE1A00'}}>申请人：</span>{item.creator}</p>:<p style={{textAlign:'center'}}>{item.allTime}</p>}
                 </div>
                 <div id='end' style={trafficInformation}>
-                  <p style={{fontWeight:900,fontSize:'20px'}}>{item.endTime}</p>
-                  <p style={{textAlign:'center'}}><span style={{marginRight:'4px',color:'#F09D3D'}}>终</span>{item.end}</p>
+                  <p style={{fontWeight: 900, fontSize: '20px'}}>{item.endTime}</p>
+                  <p style={{textAlign: 'center'}}><span
+                    style={{marginRight: '4px', color: '#F09D3D'}}>终</span>{item.endPlace}</p>
                 </div>
                 <div id='btn' style={trafficInformation}>
                   <button
-                    style={{width:'100%',height:'100px',borderRadius: '15px',backgroundColor:'#F09D3D',color:'#fff',fontSize:'10px'}}
-                    onClick={() => {this.onClick(item)}}>乘坐此次车</button>
+                    style={{
+                      width: '100%',
+                      height: '100px',
+                      borderRadius: '15px',
+                      backgroundColor: '#F09D3D',
+                      color: '#fff',
+                      fontSize: '10px'
+                    }}
+                    onClick={() => {this.onClick(item)}}>乘坐此次车
+                  </button>
                   <br />
                 </div>
               </div>
