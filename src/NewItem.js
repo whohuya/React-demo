@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 const NewItem = (props) => {
 
   const detailStyle = {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import lynuLogo from './image/logo.png'
 import NewItem from './NewItem'
 import AddCar from './AddCar'
@@ -170,10 +169,12 @@ class App extends Component {
   }
 
   onOpen = () => {
-    this.setState({
+    alert('正在加载中。。。')
+    setTimeout(()=>{this.setState({
       show: false,
       apply: true,
-    })
+    })},2500)
+
   }
 
   changeHandler () {
