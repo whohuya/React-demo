@@ -139,6 +139,14 @@ class App extends Component {
     loadingColor:'#856D42',
     loadingBackgroundColor:'#FBF8E5'
   }
+
+  componentWillUpdate(){
+    this.state.carList.sort((obj1,obj2)=>{
+      const a=obj1.startTime
+      const b=obj2.startTime
+      if(a<b){return -1}else if(a>b){return 1}else{return 0}
+    })
+  }
   onClick = (newDetail) => {
     this.setState({
       loading:true,
@@ -178,11 +186,7 @@ class App extends Component {
     let newCarList = this.state.carList
     setTimeout(()=>{
       newCarList.push(newDetail)
-      newCarList.sort((obj1,obj2)=>{
-        const a=obj1.startTime
-        const b=obj2.startTime
-        if(a<b){return -1}else if(a>b){return 1}else{return 0}
-      })
+
       this.setState({
         loading:false,
         loadingText:'加载中。。。',
