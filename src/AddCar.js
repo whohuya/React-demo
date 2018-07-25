@@ -8,6 +8,9 @@ const startPlace = [
 
 const date = new Date()
 const startTimeList = [
+  // "17:20",  //测试数据
+  // '17:21',   //测试数据
+  // '17:19',    //测试数据
   date.getHours() +':'+ date.getMinutes(),
   date.getHours() + 1 + ':00',
   date.getHours() + 2 + ':00',

@@ -134,19 +134,64 @@ class App extends Component {
     newDetail: '',
     show: false,
     apply: false,
+    loading:false,
+    loadingText:'加载中。。。',
+    loadingColor:'#856D42',
+    loadingBackgroundColor:'#FBF8E5'
   }
   onClick = (newDetail) => {
     this.setState({
-      show: true,
+      loading:true,
       apply: false,
-      newDetail: newDetail
     })
+    setTimeout(()=>{
+      this.setState({
+        loadingText:'加载成功！',
+        loadingColor:'#4B7443',
+        loadingBackgroundColor:'#E3EFDA'
+      })
+    },500)
+    setTimeout(()=>{
+      this.setState({
+        loading:false,
+        show: true,
+        loadingText:'加载中。。。',
+        loadingColor:'#856D42',
+        loadingBackgroundColor:'#FBF8E5',
+        newDetail: newDetail
+    })},1000)
+
   }
 
   onAdd = (newDetail) => {
+    this.setState({
+      loadingText:'申请中。。。',
+      loading:true,
+    })
+    setTimeout(()=>{
+      this.setState({
+        loadingText:'申请成功！',
+        loadingColor:'#4B7443',
+        loadingBackgroundColor:'#E3EFDA'
+      })
+    },500)
     let newCarList = this.state.carList
-    newCarList.push(newDetail)
-    this.setState({carList: newCarList})
+    setTimeout(()=>{
+      newCarList.push(newDetail)
+      newCarList.sort((obj1,obj2)=>{
+        const a=obj1.startTime
+        const b=obj2.startTime
+        if(a<b){return -1}else if(a>b){return 1}else{return 0}
+      })
+      this.setState({
+        loading:false,
+        loadingText:'加载中。。。',
+        loadingColor:'#856D42',
+        loadingBackgroundColor:'#FBF8E5',
+        carList: newCarList,
+      })
+    },1000)
+
     // {
     //   id: '010',
     //     startPlace: '成均桥',
@@ -169,11 +214,25 @@ class App extends Component {
   }
 
   onOpen = () => {
-    alert('正在加载中。。。')
-    setTimeout(()=>{this.setState({
+    this.setState({
+      loading:true,
       show: false,
-      apply: true,
-    })},2500)
+    })
+    setTimeout(()=>{
+      this.setState({
+        loadingText:'加载成功！',
+        loadingColor:'#4B7443',
+        loadingBackgroundColor:'#E3EFDA'
+      })
+    },500)
+    setTimeout(()=>{
+      this.setState({
+        loading:false,
+        apply: true,
+        loadingText:'加载中。。。',
+        loadingColor:'#856D42',
+        loadingBackgroundColor:'#FBF8E5'
+    })},1000)
 
   }
 
@@ -184,13 +243,16 @@ class App extends Component {
   render () {
 
     return (
+
       <div className="all"
         style={{
           background: 'linear-gradient(180deg,#F0FFFF,#fff)',
           width: '100%',
           height: '100%',
           minWidth: '1030px'
+
         }}>
+        {console.log(parseFloat(this.state.carList[5].startTime))}
         <div id='head' style={headerTitle}>
           <div style={{margin: '0 auto'}}><img src={lynuLogo}
             style={{width: '100%', height: '100%'}} /></div>
@@ -205,6 +267,15 @@ class App extends Component {
           color: '#fff'
         }}>申请临时加车
         </button>
+        {this.state.loading&&<div
+          style={{
+            width: '100%',
+            height: '45px',
+            borderRadius: '15px',
+            background: this.state.loadingBackgroundColor,
+            fontSize: '32px',
+            color: this.state.loadingColor,
+            textAlign:'center'}}>{this.state.loadingText}</div>}
         <div id='main'
           style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
           <div id='list' style={{display: 'flex', flexDirection: 'column', flexBasis: '40%',}}>
@@ -243,7 +314,7 @@ class App extends Component {
             )}
           </div>
           <div id='rightNews' style={{flexBasis: '40%', padding: '16px'}}>
-            {this.state.show && <NewItem newDetail={this.state.newDetail} />}
+            {this.state.show && <NewItem  newDetail={this.state.newDetail} />}
             {this.state.apply && <AddCar onAdd={this.onAdd} />}
           </div>
         </div>
