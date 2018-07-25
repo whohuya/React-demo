@@ -254,9 +254,7 @@ class App extends Component {
           width: '100%',
           height: '100%',
           minWidth: '1030px'
-
         }}>
-        {console.log(parseFloat(this.state.carList[5].startTime))}
         <div id='head' style={headerTitle}>
           <div style={{margin: '0 auto'}}><img src={lynuLogo}
             style={{width: '100%', height: '100%'}} /></div>

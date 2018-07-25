@@ -11,12 +11,13 @@ const startTimeList = [
   // "17:20",  //测试数据
   // '17:21',   //测试数据
   // '17:19',    //测试数据
-  date.getHours() +':'+ date.getMinutes(),
+  date.getHours() + ':' + date.getMinutes(),
   date.getHours() + 1 + ':00',
   date.getHours() + 2 + ':00',
   date.getHours() + 3 + ':00',
   date.getHours() + 4 + ':00',
 ]
+console.log(date.getHours())
 
 class AddCar extends Component {
 
@@ -56,7 +57,6 @@ class AddCar extends Component {
   }
   // TODO: 能否把所有的set合并到一个函数上？
 
-
   handleSubmit = (event) => {
     event.preventDefault()
     const {onAdd} = this.props
@@ -69,12 +69,14 @@ class AddCar extends Component {
       endTime: '∞：∞',
       startPlace: startPlace,
       creator: creator,
-      endPlace: endPlace,
       startTime: startTime,
+      endPlace: endPlace,
       allTime: allTime,
       carNumber: '临时',
     }
-    console.log(newDetail)
+    if (parseFloat(startTime) < 10 && parseFloat(startTime) >= 0) {
+      newDetail.startTime = '0' + startTime
+    }
     onAdd(newDetail)
 
     // TODO: 为什么使用 setState后出现延迟？
